@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, StyleSheet, Text, TextInput, Button, TouchableOpacity } from "react-native"
+import { View, StyleSheet, Text, TextInput, Button, TouchableOpacity, Vibration } from "react-native"
 
 import ResultBMI from "./ResultBMI"
 
@@ -10,9 +10,17 @@ export default function Form() {
     const [messageBMI, setMessageBMI] = useState("Fill in with height and weight")
     const [bmi, setBMI] = useState(null)
     const [textButton, setTextButton] = useState("Calculate")
+    const [errorMessage, setErrorMessage] = useState(null)
 
     function BMICalculator() {
         return setBMI((weight / (height * height)).toFixed(2))
+    }
+
+    function verifyBMI() {
+        if (bmi == null) {
+            Vibration.vibrate()
+            setErrorMessage("You must fill in the gap")
+        }
     }
 
     function validationBMI() {
@@ -22,17 +30,21 @@ export default function Form() {
             setWeight(null)
             setMessageBMI("Your BMI is: ")
             setTextButton("Calculate again")
+            setErrorMessage(null)
             return
         }
+        verifyBMI()
         setBMI(null)
         setTextButton("Calculate")
         setMessageBMI("Fill in with height and weight")
+        
     }
 
     return(
         <View style={styles.formContext}>
             <View style={styles.form}>
                 <Text style={styles.formLabel}>Height: </Text>
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setHeight}
@@ -41,6 +53,7 @@ export default function Form() {
                     keyboardType="numeric"
                 />
                 <Text style={styles.formLabel}>Weight: </Text>
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setWeight}
@@ -113,4 +126,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "#FFFFFF"
     },
+    errorMessage: {
+        fontSize: 12,
+        color: "red",
+        fontWeight: "bold",
+        paddingLeft: 20,
+    }
 })
