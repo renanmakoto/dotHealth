@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, StyleSheet, Text, TextInput, Button, TouchableOpacity, Vibration } from "react-native"
+import { View, StyleSheet, Text, TextInput, Button, TouchableOpacity, Vibration, Pressable, Keyboard } from "react-native"
 
 import ResultBMI from "./ResultBMI"
 
@@ -13,7 +13,8 @@ export default function Form() {
     const [errorMessage, setErrorMessage] = useState(null)
 
     function BMICalculator() {
-        return setBMI((weight / (height * height)).toFixed(2))
+        let heightFormat = height.replace(",", ".")
+        return setBMI((weight / (heightFormat * heightFormat)).toFixed(2))
     }
 
     function verifyBMI() {
@@ -41,7 +42,7 @@ export default function Form() {
     }
 
     return(
-        <View style={styles.formContext}>
+        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
             <View style={styles.form}>
                 <Text style={styles.formLabel}>Height: </Text>
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -77,7 +78,7 @@ export default function Form() {
                 messageResultBMI={messageBMI} 
                 resultBMI={bmi}
             />
-        </View>
+        </Pressable>
     )
 }
 
@@ -85,18 +86,15 @@ const styles = StyleSheet.create({
     formContext: {
         width: "100%",
         height: "100%",
-        bottom: 0,
+        flex: 1,
         backgroundColor: "#FFFFFF",
         alignItems: "center",
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        marginTop: 30,
+        paddingTop: 30,
     },
     form: {
         width: "100%",
-        height: "auto",
-        marginTop: 30,
-        padding: 10,
     },
     formLabel: {
         color: "#000000",
