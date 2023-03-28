@@ -10,20 +10,17 @@ export default function ResultBMI(props) {
 
     return(
         <View style={styles.resultBMI}>
+
+            <Text style={styles.infotmation}>{props.messageResultBMI}</Text>
+            <Text style={styles.numberBMI}>{props.resultBMI}</Text>
             <View style={styles.boxShareButton}>
-                {props.resultBMI != null ?
                     <TouchableOpacity 
                         onPress={onShare}
                         style={styles.shared}
                     >
                         <Text style={styles.sharedText}>Share</Text>
                     </TouchableOpacity>
-                    :
-                        <View/>
-                }
             </View>
-            <Text style={styles.infotmation}>{props.messageResultBMI}</Text>
-            <Text style={styles.numberBMI}>{props.resultBMI}</Text>
         </View>
     )
 }
@@ -51,6 +48,7 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         marginBottom: 10,
+        marginTop: 30,
     },
     shared: {
         backgroundColor: "#1877F2",

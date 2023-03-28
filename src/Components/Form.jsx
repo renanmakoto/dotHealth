@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, StyleSheet, Text, TextInput, Button, TouchableOpacity, Vibration, Pressable, Keyboard } from "react-native"
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Vibration, Pressable, Keyboard, FlatList } from "react-native"
 
 import ResultBMI from "./ResultBMI"
 
@@ -11,10 +11,13 @@ export default function Form() {
     const [bmi, setBMI] = useState(null)
     const [textButton, setTextButton] = useState("Calculate")
     const [errorMessage, setErrorMessage] = useState(null)
+    const [BMIList, setBMIList] = useState([])
 
     function BMICalculator() {
         let heightFormat = height.replace(",", ".")
-        return setBMI((weight / (heightFormat * heightFormat)).toFixed(2))
+        let totalBMI = ((weight / (heightFormat * heightFormat)).toFixed(2))
+        setBMIList ((arr) => [...arr, {id: new Date().getTime(), bmi: totalBMI}])
+        setBMI(totalBMI)
     }
 
     function verifyBMI() {
@@ -25,6 +28,7 @@ export default function Form() {
     }
 
     function validationBMI() {
+        console.log(BMIList)
         if (weight != null && height != null) {
             BMICalculator()
             setHeight(null)
@@ -33,17 +37,19 @@ export default function Form() {
             setTextButton("Calculate again")
             setErrorMessage(null)
             return
+        } else {
+            verifyBMI()
+            setBMI(null)
+            setTextButton("Calculate")
+            setMessageBMI("Fill in with height and weight")
         }
-        verifyBMI()
-        setBMI(null)
-        setTextButton("Calculate")
-        setMessageBMI("Fill in with height and weight")
         
     }
 
     return(
-        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
-            <View style={styles.form}>
+            <View style={styles.formContext}>
+                {bmi == null ? 
+                <Pressable onPress={Keyboard.dismiss} style={styles.form}>
                 <Text style={styles.formLabel}>Height: </Text>
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
                 <TextInput
@@ -73,12 +79,42 @@ export default function Form() {
                     >{textButton}
                     </Text>
                 </TouchableOpacity>
+                </Pressable>
+                :
+                    <View style={styles.exhibitionResultBMI}>
+                    <ResultBMI 
+                        messageResultBMI={messageBMI} 
+                        resultBMI={bmi}
+                    />
+                    <TouchableOpacity
+                    onPress={() => {
+                        validationBMI()
+                    }}
+                    style={styles.buttonCalculator}
+                >
+                    <Text
+                        style={styles.textButtonCalculator}    
+                    >{textButton}
+                    </Text>
+                </TouchableOpacity>
+                    </View>
+                }
+                <FlatList 
+                    style={styles.listBMI} 
+                    data={BMIList.reverse()}
+                    renderItem={({item}) => {
+                        return(
+                            <Text style={styles.resultBMIItem}>
+                                <Text style={styles.textResultItemList}>BMI Result: </Text>
+                                {item.bmi}
+                            </Text>
+                        )
+                    }}
+                    keyExtractor={(item) => {
+                        item.id
+                    }}    
+                />
             </View>
-            <ResultBMI 
-                messageResultBMI={messageBMI} 
-                resultBMI={bmi}
-            />
-        </Pressable>
     )
 }
 
@@ -129,5 +165,9 @@ const styles = StyleSheet.create({
         color: "red",
         fontWeight: "bold",
         paddingLeft: 20,
-    }
+    },
+    exhibitionResultBMI: {
+        width: "100%",
+        height: "50%",
+    },
 })
