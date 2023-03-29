@@ -100,6 +100,7 @@ export default function Form() {
                     </View>
                 }
                 <FlatList 
+                    showsVerticalScrollIndicator={false}
                     style={styles.listBMI} 
                     data={BMIList.reverse()}
                     renderItem={({item}) => {
@@ -170,4 +171,18 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "50%",
     },
+    listBMI: {
+        marginTop: 20,
+    },
+    resultBMIItem: {
+        fontSize: 26,
+        color: "red",
+        height: 50,
+        width: "100%",
+        paddingRight: 20,
+    },
+    textResultItemList: {
+        fontSize: 16,
+        color: "red",
+    }
 })
