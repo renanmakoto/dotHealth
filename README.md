@@ -20,7 +20,6 @@ TECHNOLOGIES USED:
 
 - [x] Design
 - [x] Functionalities
-- [x] Database storage
 - [ ] Uploaded to Google Play Store
 
 <p align="center">With ❤ by <img src=https://img.shields.io/badge/-dotExtension-black /> <p/>
