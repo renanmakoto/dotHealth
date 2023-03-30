@@ -2,7 +2,7 @@
 
 <p align="center">A BMI calculator I developed to practice my React Native skills. Not only can it calculate the BMI with a simple UI, but also share the BMI result within social medias.</p>
 
-<img src="https://img.shields.io/badge/os-Android-green" /> <img src="https://img.shields.io/badge/release-v1.0.0-blue" /> <a href="https://www.npmjs.com/"><img src="https://img.shields.io/badge/npm-v9.3.1-red" /></a> <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/node.js-v.18.14.0-brightgreen" /></a> <img src="https://img.shields.io/badge/license-MIT-blue" />
+<img src="https://img.shields.io/badge/os-Android-green" /> <img src="https://img.shields.io/badge/release-v1.0.0-blue" /> <a href="https://www.npmjs.com/"><img src="https://img.shields.io/badge/npm-v9.3.1-red" /></a> <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/node.js-v.18.14.0-brightgreen" /></a> <img src="https://img.shields.io/badge/license-MIT-blue" /> <img src="https://img.shields.io/badge/ReactNative-v0.71.4-blue" />
 
 TECHNOLOGIES USED:
 
