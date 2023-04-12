@@ -24,7 +24,7 @@ TECHNOLOGIES USED:
 - [x] Functionalities
 - [ ] Uploaded to Google Play Store
 
-(![health](https://user-images.githubusercontent.com/65373130/231608037-9b373388-475b-423d-86a6-cfe520f1d9c3.gif)
+<video style="width: 100px">(![health](https://user-images.githubusercontent.com/65373130/231608037-9b373388-475b-423d-86a6-cfe520f1d9c3.gif)</video>
 
 <p align="center">With ❤ by <img src=https://img.shields.io/badge/-dotExtension-black /> <p/>
 
