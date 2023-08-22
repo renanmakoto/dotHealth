@@ -36,12 +36,12 @@ const styles = StyleSheet.create({
     },
     infotmation: {
         fontSize: 18,
-        color: "#FF0043",
+        color: "#FFFFFF",
         fontWeight: "bold",
     },
     numberBMI: {
         fontSize: 48,
-        color: "#FF0043",
+        color: "#FFFFFF",
         fontWeight: "bold",
     },
     boxShareButton: {

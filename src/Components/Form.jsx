@@ -111,8 +111,8 @@ export default function Form() {
                             </Text>
                         )
                     }}
-                    keyExtractor={(item) => {
-                        item.id
+                    keyExtractor={(itemEx) => {
+                        itemEx.id
                     }}    
                 />
             </View>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
         flex: 1,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#858585",
         alignItems: "center",
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     formLabel: {
-        color: "#000000",
+        color: "white",
         fontSize: 18,
         paddingLeft: 20,
     },
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         width: "90%",
-        backgroundColor: "#FF0043",
+        backgroundColor: "#00D6D6",
         paddingTop: 14,
         paddingBottom: 14,
         marginLeft: 12,
@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
     },
     textButtonCalculator: {
         fontSize: 20,
-        color: "#FFFFFF"
+        color: "#FFFFFF",
+        fontWeight: "bold"
     },
     errorMessage: {
         fontSize: 12,
@@ -176,13 +177,13 @@ const styles = StyleSheet.create({
     },
     resultBMIItem: {
         fontSize: 26,
-        color: "red",
+        color: "#FFFFFF",
         height: 50,
         width: "100%",
         paddingRight: 20,
     },
     textResultItemList: {
         fontSize: 16,
-        color: "red",
+        color: "#FFFFFF",
     }
 })
