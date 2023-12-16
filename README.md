@@ -1,6 +1,6 @@
 <h1 align="center">dotHealth</h1>
 
-<p align="center">A BMI calculator I developed to practice my React Native skills. Not only can it calculate the BMI with a simple UI, but also share the BMI result within social medias.</p>
+<p align="center">A BMI calculator I developed with React Native. Not only can it calculate the BMI with a simple UI, but also share the BMI result within social medias.</p>
 
 <div align="center">
 
