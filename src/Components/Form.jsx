@@ -56,7 +56,7 @@ export default function Form() {
                     style={styles.input}
                     onChangeText={setHeight}
                     value={height} 
-                    placeholder="Ex. 1.70" 
+                    placeholder="Ex. 1.70 (Use .)" 
                     keyboardType="numeric"
                 />
                 <Text style={styles.formLabel}>Weight: </Text>

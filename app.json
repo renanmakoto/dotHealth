@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "health-app",
-    "slug": "health-app",
+    "name": "dotHealth",
+    "slug": "dothealth",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,8 +27,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "298a0530-fbcf-47aa-b03d-f4649285937e"
+        "projectId": "3e7c702c-ad23-4e30-a6f8-f17dd94f6766"
       }
-    }
+    },
+    "owner": "renanmakoto"
   }
 }
