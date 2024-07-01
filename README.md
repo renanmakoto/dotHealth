@@ -30,7 +30,7 @@ TECHNOLOGIES USED:
 
 ![health](https://user-images.githubusercontent.com/65373130/231608037-9b373388-475b-423d-86a6-cfe520f1d9c3.gif)
 
-<img src="https://github.com/renanmakoto/health-app/assets/65373130/116afe83-f82e-49e2-a1c6-ee65de49be64" style="width: 300px; height: 500px;"/>
+<img src="https://github.com/renanmakoto/health-app/assets/65373130/116afe83-f82e-49e2-a1c6-ee65de49be64" style="width: 300px; height: 600px;"/>
 
 <p align="center">With ❤ by <img src=https://img.shields.io/badge/-dotExtension-black /> <p/>
 
