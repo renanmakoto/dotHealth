@@ -2,7 +2,7 @@
   "expo": {
     "name": "dotHealth",
     "slug": "dothealth",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -27,7 +27,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "3e7c702c-ad23-4e30-a6f8-f17dd94f6766"
+        "projectId": "91506c8f-974f-4454-a623-f2063080f2f1"
       }
     },
     "owner": "renanmakoto"
