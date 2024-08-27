@@ -1,6 +1,11 @@
 <h1 align="center">dotHealth</h1>
 
-<p align="center">A BMI calculator I developed with React Native. Not only can it calculate the BMI with a simple UI, but also share the BMI result within social medias.</p>
+<p align="center">dotHealth is a simple and intuitive app that helps you calculate your Body Mass Index (BMI) and Basal Metabolic Rate (BMR) effortlessly. Whether you're on a journey to better health or just curious about your metrics, dotHealth is here to assist you. No account is required—just input your data, and get your results instantly. Key features include:
+BMI Calculation: Determine your BMI based on your height and weight.
+BMR Calculation: Calculate your daily calorie needs with our easy-to-use BMR calculator.
+Simple and Clean Interface: User-friendly design with no distractions.
+No Personal Data Collection: Your data stays on your device, ensuring complete privacy.
+Completely Free: No in-app purchases or ads. Just a straightforward tool to help you stay on top of your health.</p>
 
 <div align="center">
 
