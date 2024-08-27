@@ -28,8 +28,7 @@ TECHNOLOGIES USED:
 - [x] Functionalities
 - [ ] Uploaded to Google Play Store
 
-<img src="https://github.com/renanmakoto/health-app/assets/65373130/d5667848-3f8d-4481-a3f3-9fc097f6acc0" style="width: 300px; height: 600px;"/>
-
+<img src="https://github.com/user-attachments/assets/8877523a-1b7b-432c-ac19-641e58860d2d" style="width: 300px; height: 600px;"/>
 
 <p align="center">With ❤ by <img src=https://img.shields.io/badge/-dotExtension-black /> <p/>
 
