@@ -1,10 +1,8 @@
 import React, { useState } from "react"
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Vibration, Pressable, Keyboard, FlatList } from "react-native"
-
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Vibration, Pressable, Keyboard, FlatList, KeyboardAvoidingView, Platform } from "react-native"
 import ResultBMI from "./ResultBMI"
 
 export default function BMICalculator() {
-
     const [height, setHeight] = useState(null)
     const [weight, setWeight] = useState(null)
     const [messageBMI, setMessageBMI] = useState("Fill in with height and weight")
@@ -48,62 +46,68 @@ export default function BMICalculator() {
     }
 
     return (
-        <View style={styles.formContext}>
-            <Text style={styles.title}>BMI Calculator</Text>
-            {bmi == null ? (
-                <Pressable onPress={Keyboard.dismiss} style={styles.form}>
-                    <Text style={styles.formLabel}>Height: </Text>
-                    <Text style={styles.errorMessage}>{errorMessage}</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={setHeight}
-                        value={height}
-                        placeholder="Ex. 1.70 (Use . or 170)"
-                        keyboardType="numeric"
-                    />
-                    <Text style={styles.formLabel}>Weight: </Text>
-                    <Text style={styles.errorMessage}>{errorMessage}</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={setWeight}
-                        value={weight}
-                        placeholder="Ex. 70"
-                        keyboardType="numeric"
-                    />
-                    <TouchableOpacity
-                        onPress={validationBMI}
-                        style={styles.buttonCalculator}
-                    >
-                        <Text style={styles.textButtonCalculator}>{textButton}</Text>
-                    </TouchableOpacity>
-                </Pressable>
-            ) : (
-                <View style={styles.exhibitionResultBMI}>
-                    <ResultBMI
-                        messageResultBMI={messageBMI}
-                        resultBMI={bmi}
-                    />
-                    <TouchableOpacity
-                        onPress={validationBMI}
-                        style={styles.buttonCalculator}
-                    >
-                        <Text style={styles.textButtonCalculator}>{textButton}</Text>
-                    </TouchableOpacity>
-                </View>
-            )}
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                style={styles.listBMI}
-                data={BMIList.reverse()}
-                renderItem={({ item }) => (
-                    <Text style={styles.resultBMIItem}>
-                        <Text style={styles.textResultItemList}>BMI Result: </Text>
-                        {item.bmi}
-                    </Text>
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+            <View style={styles.formContext}>
+                <Text style={styles.title}>BMI Calculator</Text>
+                {bmi == null ? (
+                    <Pressable onPress={Keyboard.dismiss} style={styles.form}>
+                        <Text style={styles.formLabel}>Height: </Text>
+                        <Text style={styles.errorMessage}>{errorMessage}</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={setHeight}
+                            value={height}
+                            placeholder="Ex. 1.70 (Use . or 170)"
+                            keyboardType="numeric"
+                        />
+                        <Text style={styles.formLabel}>Weight: </Text>
+                        <Text style={styles.errorMessage}>{errorMessage}</Text>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={setWeight}
+                            value={weight}
+                            placeholder="Ex. 70"
+                            keyboardType="numeric"
+                        />
+                        <TouchableOpacity
+                            onPress={validationBMI}
+                            style={styles.buttonCalculator}
+                        >
+                            <Text style={styles.textButtonCalculator}>{textButton}</Text>
+                        </TouchableOpacity>
+                    </Pressable>
+                ) : (
+                    <View style={styles.exhibitionResultBMI}>
+                        <ResultBMI
+                            messageResultBMI={messageBMI}
+                            resultBMI={bmi}
+                        />
+                        <TouchableOpacity
+                            onPress={validationBMI}
+                            style={styles.buttonCalculator}
+                        >
+                            <Text style={styles.textButtonCalculator}>{textButton}</Text>
+                        </TouchableOpacity>
+                    </View>
                 )}
-                keyExtractor={(item) => item.id}
-            />
-        </View>
+
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    style={styles.listBMI}
+                    data={BMIList.reverse()}
+                    renderItem={({ item }) => (
+                        <Text style={styles.resultBMIItem}>
+                            <Text style={styles.textResultItemList}>BMI Result: </Text>
+                            {item.bmi}
+                        </Text>
+                    )}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
     },
     form: {
         width: "100%",
-        marginTop: 100
+        marginTop: 50,
     },
     formLabel: {
         color: "white",

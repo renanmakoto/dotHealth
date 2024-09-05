@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 
 export default function BMRCalculator() {
@@ -10,7 +10,7 @@ export default function BMRCalculator() {
   const [bmr, setBmr] = useState(null)
 
   const calculateBMR = () => {
-    Keyboard.dismiss()  // Dismiss the keyboard when the button is pressed
+    Keyboard.dismiss()
     
     let heightInMeters = parseFloat(height)
     if (heightInMeters > 10) {
@@ -27,49 +27,54 @@ export default function BMRCalculator() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>BMR Calculator</Text>
-      <View style={styles.pickerContainer}>
-        <Picker
-          selectedValue={gender}
-          style={styles.picker}
-          onValueChange={(itemValue) => setGender(itemValue)}
-        >
-          <Picker.Item label="Male" value="male" />
-          <Picker.Item label="Female" value="female" />
-        </Picker>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>BMR Calculator</Text>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={gender}
+            style={styles.picker}
+            onValueChange={(itemValue) => setGender(itemValue)}
+          >
+            <Picker.Item label="Male" value="male" />
+            <Picker.Item label="Female" value="female" />
+          </Picker>
+        </View>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Age (years)"
+          keyboardType="numeric"
+          value={age}
+          onChangeText={setAge}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Weight (kg)"
+          keyboardType="numeric"
+          value={weight}
+          onChangeText={setWeight}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Height (cm)"
+          keyboardType="numeric"
+          value={height}
+          onChangeText={setHeight}
+        />
+
+        <TouchableOpacity onPress={calculateBMR} style={styles.button}>
+          <Text style={styles.buttonText}>CALCULATE BMR</Text>
+        </TouchableOpacity>
+
+        {bmr && (
+          <Text style={styles.result}>Your BMR is: {bmr} kcal/day</Text>
+        )}
       </View>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Age (years)"
-        keyboardType="numeric"
-        value={age}
-        onChangeText={setAge}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Weight (kg)"
-        keyboardType="numeric"
-        value={weight}
-        onChangeText={setWeight}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Height (cm)"
-        keyboardType="numeric"
-        value={height}
-        onChangeText={setHeight}
-      />
-
-      <TouchableOpacity onPress={calculateBMR} style={styles.button}>
-        <Text style={styles.buttonText}>CALCULATE BMR</Text>
-      </TouchableOpacity>
-
-      {bmr && (
-        <Text style={styles.result}>Your BMR is: {bmr} kcal/day</Text>
-      )}
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginBottom: 20,
     backgroundColor: '#FFFFFF',
-    marginTop: 100
+    marginTop: 30,
   },
   picker: {
     width: '100%',
@@ -121,6 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
   },
   buttonText: {
     color: '#FFFFFF',
@@ -132,5 +138,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#FFFFFF',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 10,
+    width: '100%',
+    alignItems: 'center',
   },
 })
