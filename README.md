@@ -28,7 +28,7 @@ TECHNOLOGIES USED:
 
 - [x] Design
 - [x] Functionalities
-- [ ] Uploaded to Google Play Store
+- [x] Uploaded to Google Play Store
 
 <img src="https://github.com/user-attachments/assets/8877523a-1b7b-432c-ac19-641e58860d2d" style="width: 300px; height: 600px;"/>
 
