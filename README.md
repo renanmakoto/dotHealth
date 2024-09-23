@@ -20,8 +20,9 @@ TECHNOLOGIES USED:
 <a href="https://expo.dev/"><img src="https://bitrise-steplib-collection.s3.amazonaws.com/steps/expo-detach/assets/icon.svg" style="width: 64px; height: 64px" /></a>
 
 <h4 align="center"> 
-	🚧  dotHealth 🚀 Will be uploaded to Google Play Store soon...  🚧
+	Google Play Store link to install dotHealth:
 </h4>
+<p align="center">https://play.google.com/store/apps/details?id=com.dotextension.dothealth</p>
 
 ### Features
 
