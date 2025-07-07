@@ -4,7 +4,7 @@ import { View, StyleSheet, Text } from "react-native"
 export default function Footer() {
     return(
         <View>
-            <Text style={styles.footer}>2024 - by dotExtension</Text>
+            <Text style={styles.footer}>2025 - by dotExtension</Text>
         </View>
     )
 }
