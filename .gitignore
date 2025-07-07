@@ -1,0 +1,93 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock # if you use yarn, otherwise remove/comment out
+.npm/
+
+# Expo
+.expo/
+.expo-shared/
+web-build/
+# If you are using Expo Application Services (EAS) and have generated native directories:
+# /android/
+# /ios/
+# eas-build/ # temporary build artifacts
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+.Trashes
+._*
+.Spotlight-V100
+.fseventsd
+.VolumeIcon.icns
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# VSCode
+.vscode/
+
+# Environment variables
+.env
+.env.*.local
+
+# Build artifacts and logs
+*.log
+*.rn-bundle
+*.map
+build/
+dist/
+temp/
+coverage/
+
+# XCode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace # This might be important if you have a bare workflow or custom native code
+
+# Android / IntelliJ
+.gradle/
+local.properties
+*.iml
+.idea/
+.build/ # Another potential build output directory
+*.apk
+*.aab # Although eas builds handle this, it's good to ignore local ones.
+*.keystore # Crucial: do NOT commit your keystore!
+# For Android Studio
+gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.jar
+
+# BUCK
+buck-out/
+.buckd/
+
+# Fastlane
+# It is recommended to not store the screenshots in the git repo. Instead, use Fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
