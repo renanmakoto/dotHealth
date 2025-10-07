@@ -25,6 +25,11 @@ TECHNOLOGIES USED:
 - [x] Functionalities
 - [x] Uploaded to Google Play Store
 
+<h4 align="center"> 
+	Google Play Store link to install dotHealth:
+</h4>
+<p align="center">https://play.google.com/store/apps/details?id=com.dotextension.dothealth</p>
+
 <img src="./sample.gif" style="width: 300px; height: 600px;"/>
 
 <p align="center">With ❤ by <img src=https://img.shields.io/badge/-dotExtension-black /> <p/>
