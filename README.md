@@ -9,7 +9,7 @@ Completely Free: No in-app purchases or ads. Just a straightforward tool to help
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/os-Android-green" /> <img src="https://img.shields.io/badge/release-v1.0.1-blue" /> <a href="https://www.npmjs.com/"><img src="https://img.shields.io/badge/npm-v10.8.2-red" /></a> <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/node.js-v.20.19.4-brightgreen" /></a> <img src="https://img.shields.io/badge/ReactNative-v0.79.5-blue" /> <img src="https://img.shields.io/badge/React-v19.2.0-blue" /> <img src="https://img.shields.io/badge/Expo-v51.0.17-white" />
+<img src="https://img.shields.io/badge/os-Android-green" /> <img src="https://img.shields.io/badge/release-v1.0.1-blue" /> <a href="https://www.npmjs.com/"><img src="https://img.shields.io/badge/npm-v10.8.2-red" /></a> <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/node.js-v.20.19.4-brightgreen" /></a> <img src="https://img.shields.io/badge/ReactNative-v0.79.5-blue" /> <img src="https://img.shields.io/badge/React-v19.0.0-blue" /> <img src="https://img.shields.io/badge/Expo-v51.0.17-white" />
 
 TECHNOLOGIES USED:
 
