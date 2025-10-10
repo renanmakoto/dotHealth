@@ -16,9 +16,8 @@ export default function App() {
     <SafeAreaProvider>
       {/* Configure the StatusBar */}
       <StatusBar 
-        barStyle="light-content"
+        barStyle="dark-content" 
         backgroundColor="#ffffff"
-        color = "#000000"
       />
       <NavigationContainer>
         <Stack.Navigator
