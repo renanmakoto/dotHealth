@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
     fontSize: 44,
     color: '#00ADA2',
     fontWeight: 'bold',
-    marginTop: -200,
-    marginBottom: 160
+    marginTop: -240,
+    marginBottom: 110
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#FFFFFF',
     marginBottom: 40,
     textAlign: 'center',
