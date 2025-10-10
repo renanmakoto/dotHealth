@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Keyboard, Vibration } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 
 export default function BMRCalculator() {
@@ -8,9 +8,22 @@ export default function BMRCalculator() {
   const [height, setHeight] = useState('')
   const [gender, setGender] = useState('male')
   const [bmr, setBmr] = useState(null)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const calculateBMR = () => {
     Keyboard.dismiss()
+    
+    // Validate that all fields are filled
+    if (!age || !weight || !height) {
+      setErrorMessage('Please fill in all fields (age, weight, and height) to calculate your BMR.')
+      setBmr(null)
+      // Add vibration feedback
+      Vibration.vibrate([0, 500, 200, 500])
+      return
+    }
+
+    // Clear any previous error message
+    setErrorMessage('')
     
     let heightInMeters = parseFloat(height)
     if (heightInMeters > 10) {
@@ -69,6 +82,10 @@ export default function BMRCalculator() {
         <TouchableOpacity onPress={calculateBMR} style={styles.button}>
           <Text style={styles.buttonText}>CALCULATE BMR</Text>
         </TouchableOpacity>
+
+        {errorMessage ? (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        ) : null}
 
         {bmr && (
           <Text style={styles.result}>Your BMR is: {bmr} kcal/day</Text>
@@ -138,6 +155,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#FFFFFF',
+  },
+  errorMessage: {
+    marginTop: 20,
+    fontSize: 16,
+    color: '#FFB6C1',
+    textAlign: 'center',
+    paddingHorizontal: 20,
   },
   footer: {
     position: 'absolute',
