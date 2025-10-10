@@ -25,7 +25,7 @@ export default function Footer() {
     }, [])
 
     if (isKeyboardVisible) {
-        return null // Hide footer when keyboard is visib
+        return null
     }
 
     return(
