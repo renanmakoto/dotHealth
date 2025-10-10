@@ -17,7 +17,8 @@ export default function App() {
       {/* Configure the StatusBar */}
       <StatusBar 
         barStyle="light-content"
-        backgroundColor="#000000"
+        backgroundColor="#ffffff"
+        color = "#000000"
       />
       <NavigationContainer>
         <Stack.Navigator

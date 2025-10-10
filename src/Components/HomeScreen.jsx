@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
   },
   title: {
-    fontSize: 54,
+    fontSize: 44,
     color: '#00ADA2',
     fontWeight: 'bold',
     marginTop: -200,
