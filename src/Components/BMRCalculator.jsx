@@ -18,7 +18,7 @@ export default function BMRCalculator() {
       setErrorMessage('Please fill in all fields (age, weight, and height) to calculate your BMR.')
       setBmr(null)
       // Add vibration feedback
-      Vibration.vibrate([0, 500, 200, 500])
+      Vibration.vibrate(500)
       return
     }
 
