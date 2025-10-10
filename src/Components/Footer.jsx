@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
     footer: {
         color: '#FFFFFF',
         fontWeight: 'Bold',
-        height: 50,
+        height: 70,
         backgroundColor: '#858585',
         textAlign: 'center',
+        paddingBottom: 30,
     }
 })
