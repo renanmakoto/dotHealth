@@ -49,17 +49,19 @@ export default function BMRCalculator() {
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={gender}
-            style={styles.picker}
+            style={[styles.picker, { color: '#000' }]} // picker text color
+            dropdownIconColor="#000"  // icon color (Android)
             onValueChange={(itemValue) => setGender(itemValue)}
           >
-            <Picker.Item label="Male" value="male" />
-            <Picker.Item label="Female" value="female" />
+            <Picker.Item label="Male" value="male" color="#000" />
+            <Picker.Item label="Female" value="female" color="#000" />
           </Picker>
         </View>
 
         <TextInput
           style={styles.input}
           placeholder="Age (years)"
+          placeholderTextColor="#9AA0A6"
           keyboardType="numeric"
           value={age}
           onChangeText={setAge}
@@ -67,6 +69,7 @@ export default function BMRCalculator() {
         <TextInput
           style={styles.input}
           placeholder="Weight (kg)"
+          placeholderTextColor="#9AA0A6"
           keyboardType="numeric"
           value={weight}
           onChangeText={setWeight}
@@ -74,6 +77,7 @@ export default function BMRCalculator() {
         <TextInput
           style={styles.input}
           placeholder="Height (cm)"
+          placeholderTextColor="#9AA0A6"
           keyboardType="numeric"
           value={height}
           onChangeText={setHeight}
@@ -135,6 +139,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingLeft: 10,
     backgroundColor: '#F6F6F6',
+    color: '#000',  // text color for inputs
   },
   button: {
     backgroundColor: '#00ADA2',
@@ -162,11 +167,5 @@ const styles = StyleSheet.create({
     color: '#FFB6C1',
     textAlign: 'center',
     paddingHorizontal: 20,
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 10,
-    width: '100%',
-    alignItems: 'center',
   },
 })
