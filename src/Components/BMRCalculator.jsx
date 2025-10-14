@@ -46,6 +46,8 @@ export default function BMRCalculator() {
     >
       <View style={styles.container}>
         <Text style={styles.title}>BMR Calculator</Text>
+        
+        {/* Gender Picker with border radius */}
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={gender}
@@ -125,10 +127,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: '#FFFFFF',
     marginTop: 30,
+    zIndex: 10, // Ensure the picker is above the screen and avoids any dark overlay issues
   },
   picker: {
     width: '100%',
     height: 50,
+    backgroundColor: '#FFFFFF', // Ensure a consistent background
   },
   input: {
     width: '80%',
