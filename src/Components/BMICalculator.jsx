@@ -87,7 +87,6 @@ export default function BMICalculator() {
               value={weight}
               placeholder="Ex. 70"
               keyboardType="numeric"
-              // 🔧 Ensure placeholder is visible in release builds
               placeholderTextColor="#8A8F98"
               selectionColor="#00ADA2"
             />
