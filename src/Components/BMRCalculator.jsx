@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingLeft: 10,
     backgroundColor: '#F6F6F6',
-    color: '#000',  // text color for inputs
+    color: '#000',
   },
   button: {
     backgroundColor: '#00ADA2',
