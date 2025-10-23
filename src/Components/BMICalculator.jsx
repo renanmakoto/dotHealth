@@ -76,7 +76,6 @@ export default function BMICalculator() {
               placeholder="Ex. 1.70 (Use . or 170)"
               keyboardType="numeric"
               placeholderTextColor="#8A8F98"
-              // Also set actual text color explicitly
               selectionColor="#00ADA2"
             />
 
