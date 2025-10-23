@@ -75,7 +75,6 @@ export default function BMICalculator() {
               value={height}
               placeholder="Ex. 1.70 (Use . or 170)"
               keyboardType="numeric"
-              // 🔧 Ensure placeholder is visible in release builds
               placeholderTextColor="#8A8F98"
               // Also set actual text color explicitly
               selectionColor="#00ADA2"
