@@ -52,7 +52,7 @@ export default function BMRCalculator() {
           <Picker
             selectedValue={gender}
             style={[styles.picker, { color: '#000' }]} // picker text color
-            dropdownIconColor="#000"  // icon color (Android)
+            dropdownIconColor="#000"
             onValueChange={(itemValue) => setGender(itemValue)}
           >
             <Picker.Item label="Male" value="male" color="#000" />
