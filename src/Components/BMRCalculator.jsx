@@ -22,7 +22,6 @@ export default function BMRCalculator() {
       return
     }
 
-    // Clear any previous error message
     setErrorMessage('')
     
     let heightInMeters = parseFloat(height)
