@@ -47,7 +47,6 @@ export default function BMRCalculator() {
       <View style={styles.container}>
         <Text style={styles.title}>BMR Calculator</Text>
         
-        {/* Gender Picker with border radius */}
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={gender}
