@@ -51,7 +51,7 @@ export default function BMRCalculator() {
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={gender}
-            style={[styles.picker, { color: '#000' }]} // picker text color
+            style={[styles.picker, { color: '#000' }]}
             dropdownIconColor="#000"
             onValueChange={(itemValue) => setGender(itemValue)}
           >
