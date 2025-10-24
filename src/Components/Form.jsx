@@ -108,7 +108,7 @@ export default function Form() {
             />
             <Text
                 style={styles.footer}
-            >2023 - by dotExtension | Renan Makoto</Text>
+            >2025 - by dotExtension | Renan Makoto</Text>
         </View>
     )
 }
