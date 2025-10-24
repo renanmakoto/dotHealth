@@ -13,7 +13,6 @@ export default function BMRCalculator() {
   const calculateBMR = () => {
     Keyboard.dismiss()
     
-    // Validate that all fields are filled
     if (!age || !weight || !height) {
       setErrorMessage('Please fill in all fields (age, weight, and height) to calculate your BMR.')
       setBmr(null)
