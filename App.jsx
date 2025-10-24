@@ -14,7 +14,6 @@ const Stack = createStackNavigator()
 export default function App() {
   return (
     <SafeAreaProvider>
-      {/* Configure the StatusBar */}
       <StatusBar 
         barStyle="dark-content" 
         backgroundColor="#F6F6F6"
