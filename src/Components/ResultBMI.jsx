@@ -2,39 +2,57 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 export default function ResultBMI({ messageResultBMI, resultBMI }) {
+  if (!resultBMI) {
+    return null
+  }
+
   return (
-    <View style={styles.result}>
-      <View style={styles.resultBG}>
-        <Text style={styles.message}>{messageResultBMI}</Text>
-        <Text style={styles.resultNumber}>{resultBMI}</Text>
+    <View style={styles.container}>
+      <View style={styles.badge}>
+        <Text style={styles.badgeText}>BMI</Text>
       </View>
+      <Text style={styles.message}>{messageResultBMI}</Text>
+      <Text style={styles.value}>{resultBMI}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  result: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  container: {
+    width: "100%",
+    borderRadius: 24,
+    backgroundColor: "#F6F6F6",
+    paddingVertical: 28,
+    paddingHorizontal: 24,
+    alignItems: "center",
+    shadowColor: "#000000",
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 3,
   },
-  resultBG: {
-    backgroundColor: '#b9b9b9',
-    width: 300,
-    borderRadius: 150,
-    height: 150,
+  badge: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
+    backgroundColor: "#00ADA2",
+  },
+  badgeText: {
+    fontSize: 12,
+    color: "#FFFFFF",
+    fontWeight: "700",
+    letterSpacing: 0.6,
   },
   message: {
-    fontSize: 18,
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 30,
+    marginTop: 16,
+    fontSize: 16,
+    color: "#8A8F98",
   },
-  resultNumber: {
-    fontSize: 48,
-    color: '#00ADA2',
-    fontWeight: 'bold',
-    textAlign: 'center'
+  value: {
+    marginTop: 12,
+    fontSize: 40,
+    fontWeight: "700",
+    color: "#00ADA2",
+    letterSpacing: 1,
   },
 })

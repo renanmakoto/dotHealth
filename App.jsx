@@ -3,7 +3,7 @@ import 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, TransitionSpecs, CardStyleInterpolators } from '@react-navigation/stack'
-import { StatusBar, KeyboardAvoidingView, Platform, View } from 'react-native'
+import { StatusBar, View, StyleSheet } from 'react-native'
 import HomeScreen from './src/Components/HomeScreen'
 import BMICalculator from './src/Components/BMICalculator'
 import BMRCalculator from './src/Components/BMRCalculator'
@@ -18,7 +18,7 @@ export default function App() {
         barStyle="dark-content" 
         backgroundColor="#F6F6F6"
       />
-      <View style={{ flex: 1 }}>
+      <View style={styles.appContainer}>
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Home"
@@ -50,3 +50,10 @@ export default function App() {
     </SafeAreaProvider>
   )
 }
+
+const styles = StyleSheet.create({
+  appContainer: {
+    flex: 1,
+    backgroundColor: '#F6F6F6',
+  },
+})

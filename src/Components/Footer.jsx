@@ -18,20 +18,28 @@ export default function Footer() {
   if (isKeyboardVisible) return null
 
   return (
-    <SafeAreaView edges={['bottom']} style={[styles.footerContainer, { paddingBottom: Math.max(insets.bottom, 10) }]}>
-      <Text style={styles.footer}>2025 - by dotExtension</Text>
+    <SafeAreaView
+      edges={['bottom']}
+      style={[
+        styles.footerContainer,
+        { paddingBottom: Math.max(insets.bottom, 10) },
+      ]}
+    >
+      <Text style={styles.footer}>2025 · by dotExtension</Text>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   footerContainer: {
-    backgroundColor: '#858585',
+    backgroundColor: '#F6F6F6',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 16,
   },
   footer: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    color: '#858585',
+    fontWeight: '600',
+    letterSpacing: 0.4,
   },
 })
