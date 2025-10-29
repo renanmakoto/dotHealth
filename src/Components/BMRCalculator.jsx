@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import {
   View,
   Text,
@@ -21,6 +21,7 @@ export default function BMRCalculator() {
   const [gender, setGender] = useState("male")
   const [bmr, setBmr] = useState(null)
   const [errorMessage, setErrorMessage] = useState("")
+  const scrollViewRef = useRef(null)
 
   const calculateBMR = () => {
     if (!age || !weight || !height) {
@@ -55,6 +56,10 @@ export default function BMRCalculator() {
     setErrorMessage("")
     setBmr(bmrValue.toFixed(2))
     Keyboard.dismiss()
+
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true })
+    }, 150)
   }
 
   return (
@@ -65,6 +70,7 @@ export default function BMRCalculator() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <ScrollView
+            ref={scrollViewRef}
             contentContainerStyle={styles.content}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTap="handled"

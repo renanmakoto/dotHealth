@@ -34,7 +34,7 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       <View style={styles.meta}>
-        <Text style={styles.metaText}>No accounts. No ads. Just essentials.</Text>
+        <Text style={styles.metaText}>No accounts. Just essentials.</Text>
       </View>
     </View>
   )

@@ -10,6 +10,8 @@ yarn-error.log
 .expo/
 .expo-shared/
 web-build/
+.expo-packager-cache/
+.expo-web-cache/
 
 # EAS build outputs
 *.apk
@@ -18,6 +20,7 @@ eas-build/
 build/
 dist/
 temp/
+*.ipa
 
 # Android and iOS native folders (not used in managed workflow)
 android/
@@ -39,7 +42,6 @@ ios/
 .Spotlight-V100
 .fseventsd
 .VolumeIcon.icns
-
 # Windows
 Thumbs.db
 ehthumbs.db
@@ -56,3 +58,20 @@ Desktop.ini
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+
+# Build tooling caches
+.gradle/
+.metro/
+
+# Testing outputs
+coverage/
+
+# Secrets and signing assets
+*.keystore
+*.jks
+*.p12
+*.p8
+*.mobileprovision
+*.cer
+*.pem
+*.key

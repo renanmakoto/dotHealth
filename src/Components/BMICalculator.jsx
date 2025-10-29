@@ -8,9 +8,9 @@ import {
   Vibration,
   Pressable,
   Keyboard,
-  FlatList,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from "react-native"
 import ResultBMI from "./ResultBMI"
 
@@ -91,93 +91,90 @@ export default function BMICalculator() {
       style={styles.flex}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <FlatList
+      <ScrollView
         style={styles.list}
         contentContainerStyle={styles.listContent}
-        data={historyData}
-        keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTap="handled"
-        ListHeaderComponent={() => (
-          <>
-            <View style={styles.header}>
-              <Text style={styles.title}>BMI Calculator</Text>
-              <Text style={styles.subtitle}>
-                Enter your latest measurements to get a quick insight into your body composition.
-              </Text>
+      >
+        <View style={styles.header}>
+          <Text style={styles.title}>BMI Calculator</Text>
+          <Text style={styles.subtitle}>
+            Enter your latest measurements to get a quick insight into your body composition.
+          </Text>
+        </View>
+
+        <Pressable onPress={Keyboard.dismiss} style={styles.formCard}>
+          <Text style={styles.sectionLabel}>Personal stats</Text>
+
+          {!!errorMessage && (
+            <Text style={styles.errorMessage}>{errorMessage}</Text>
+          )}
+
+          {bmi == null && (
+            <>
+              <View style={styles.field}>
+                <Text style={styles.fieldLabel}>Height</Text>
+                <Text style={styles.fieldHelper}>Centimeters or meters · example: 170 or 1.70</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={setHeight}
+                  value={height}
+                  placeholder="Ex. 170"
+                  keyboardType="numeric"
+                  placeholderTextColor="#8A8F98"
+                  selectionColor="#00ADA2"
+                  returnKeyType="next"
+                />
+              </View>
+
+              <View style={styles.field}>
+                <Text style={styles.fieldLabel}>Weight</Text>
+                <Text style={styles.fieldHelper}>Kilograms · example: 70</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={setWeight}
+                  value={weight}
+                  placeholder="Ex. 70"
+                  keyboardType="numeric"
+                  placeholderTextColor="#8A8F98"
+                  selectionColor="#00ADA2"
+                  returnKeyType="done"
+                />
+              </View>
+            </>
+          )}
+
+          {bmi != null && (
+            <View style={styles.resultContainer}>
+              <ResultBMI messageResultBMI={messageBMI} resultBMI={bmi} />
             </View>
+          )}
 
-            <Pressable onPress={Keyboard.dismiss} style={styles.formCard}>
-              <Text style={styles.sectionLabel}>Personal stats</Text>
+          <TouchableOpacity onPress={validationBMI} style={styles.primaryButton} activeOpacity={0.85}>
+            <Text style={styles.primaryButtonText}>{textButton}</Text>
+          </TouchableOpacity>
+        </Pressable>
 
-              {!!errorMessage && (
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-              )}
+        <View style={styles.historyHeading}>
+          <Text style={styles.historyTitle}>Recent results</Text>
+          {historyData.length === 0 && (
+            <Text style={styles.emptyHistory}>Your history will appear here after the first calculation.</Text>
+          )}
+        </View>
 
-              {bmi == null && (
-                <>
-                  <View style={styles.field}>
-                    <Text style={styles.fieldLabel}>Height</Text>
-                    <Text style={styles.fieldHelper}>Centimeters or meters · example: 170 or 1.70</Text>
-                    <TextInput
-                      style={styles.input}
-                      onChangeText={setHeight}
-                      value={height}
-                      placeholder="Ex. 170"
-                      keyboardType="numeric"
-                      placeholderTextColor="#8A8F98"
-                      selectionColor="#00ADA2"
-                      returnKeyType="next"
-                    />
-                  </View>
-
-                  <View style={styles.field}>
-                    <Text style={styles.fieldLabel}>Weight</Text>
-                    <Text style={styles.fieldHelper}>Kilograms · example: 70</Text>
-                    <TextInput
-                      style={styles.input}
-                      onChangeText={setWeight}
-                      value={weight}
-                      placeholder="Ex. 70"
-                      keyboardType="numeric"
-                      placeholderTextColor="#8A8F98"
-                      selectionColor="#00ADA2"
-                      returnKeyType="done"
-                    />
-                  </View>
-                </>
-              )}
-
-              {bmi != null && (
-                <View style={styles.resultContainer}>
-                  <ResultBMI messageResultBMI={messageBMI} resultBMI={bmi} />
-                </View>
-              )}
-
-              <TouchableOpacity onPress={validationBMI} style={styles.primaryButton} activeOpacity={0.85}>
-                <Text style={styles.primaryButtonText}>{textButton}</Text>
-              </TouchableOpacity>
-            </Pressable>
-
-            <View style={styles.historyHeading}>
-              <Text style={styles.historyTitle}>Recent results</Text>
-              {historyData.length === 0 && (
-                <Text style={styles.emptyHistory}>Your history will appear here after the first calculation.</Text>
-              )}
-            </View>
-          </>
-        )}
-        renderItem={({ item }) => (
-          <View style={styles.historyItem}>
+        {historyData.map((item) => (
+          <View key={item.id} style={styles.historyItem}>
             <View>
               <Text style={styles.historyLabel}>BMI</Text>
               <Text style={styles.historyValue}>{item.bmi}</Text>
             </View>
             <Text style={styles.historyMeta}>Saved</Text>
           </View>
-        )}
-        ListFooterComponent={<View style={styles.footerSpacer} />}
-      />
+        ))}
+
+        <View style={styles.footerSpacer} />
+      </ScrollView>
     </KeyboardAvoidingView>
   )
 }
