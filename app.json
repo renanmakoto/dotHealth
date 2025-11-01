@@ -24,7 +24,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.dotextension.dothealth",
-      "versionCode": 19
+      "versionCode": 20
     },
     "extra": {
       "eas": {
