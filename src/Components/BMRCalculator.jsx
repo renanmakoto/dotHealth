@@ -9,7 +9,6 @@ import {
   Platform,
   Keyboard,
   Vibration,
-  TouchableWithoutFeedback,
   ScrollView,
 } from "react-native"
 import { Picker } from "@react-native-picker/picker"
@@ -67,109 +66,109 @@ export default function BMRCalculator() {
       style={styles.flex}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <ScrollView
-            ref={scrollViewRef}
-            contentContainerStyle={styles.content}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTap="handled"
-          >
-            <View style={styles.header}>
-              <Text style={styles.title}>BMR Calculator</Text>
-              <Text style={styles.subtitle}>
-                Estimate how many calories your body needs at rest to stay fueled.
-              </Text>
+      <View style={styles.container}>
+        <ScrollView
+          ref={scrollViewRef}
+          contentContainerStyle={styles.content}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTap="handled"
+          keyboardDismissMode="on-drag"
+          onScrollBeginDrag={Keyboard.dismiss}
+        >
+          <View style={styles.header}>
+            <Text style={styles.title}>BMR Calculator</Text>
+            <Text style={styles.subtitle}>
+              Estimate how many calories your body needs at rest to stay fueled.
+            </Text>
+          </View>
+
+          <View style={styles.card}>
+            <Text style={styles.sectionLabel}>Personal profile</Text>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Gender</Text>
+              <View style={styles.pickerWrapper}>
+                <Picker
+                  selectedValue={gender}
+                  onValueChange={(value) => setGender(value)}
+                  style={styles.picker}
+                  dropdownIconColor="#00ADA2"
+                >
+                  <Picker.Item label="Male" value="male" color="#111111" />
+                  <Picker.Item label="Female" value="female" color="#111111" />
+                </Picker>
+              </View>
             </View>
 
-            <View style={styles.card}>
-              <Text style={styles.sectionLabel}>Personal profile</Text>
-
-              <View style={styles.field}>
-                <Text style={styles.fieldLabel}>Gender</Text>
-                <View style={styles.pickerWrapper}>
-                  <Picker
-                    selectedValue={gender}
-                    onValueChange={(value) => setGender(value)}
-                    style={styles.picker}
-                    dropdownIconColor="#00ADA2"
-                  >
-                    <Picker.Item label="Male" value="male" color="#111111" />
-                    <Picker.Item label="Female" value="female" color="#111111" />
-                  </Picker>
-                </View>
-              </View>
-
-              <View style={styles.field}>
-                <Text style={styles.fieldLabel}>Age</Text>
-                <Text style={styles.fieldHelper}>Years · example: 29</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Age in years"
-                  placeholderTextColor="#8A8F98"
-                  keyboardType="numeric"
-                  value={age}
-                  onChangeText={setAge}
-                  returnKeyType="next"
-                  selectionColor="#00ADA2"
-                />
-              </View>
-
-              <View style={styles.field}>
-                <Text style={styles.fieldLabel}>Weight</Text>
-                <Text style={styles.fieldHelper}>Kilograms · example: 70</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Weight in kg"
-                  placeholderTextColor="#8A8F98"
-                  keyboardType="numeric"
-                  value={weight}
-                  onChangeText={setWeight}
-                  returnKeyType="next"
-                  selectionColor="#00ADA2"
-                />
-              </View>
-
-              <View style={styles.field}>
-                <Text style={styles.fieldLabel}>Height</Text>
-                <Text style={styles.fieldHelper}>Centimeters or meters · example: 172 or 1.72</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Height"
-                  placeholderTextColor="#8A8F98"
-                  keyboardType="numeric"
-                  value={height}
-                  onChangeText={setHeight}
-                  returnKeyType="done"
-                  selectionColor="#00ADA2"
-                />
-              </View>
-
-              {!!errorMessage && (
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-              )}
-
-              <TouchableOpacity
-                onPress={calculateBMR}
-                style={styles.primaryButton}
-                activeOpacity={0.85}
-              >
-                <Text style={styles.primaryButtonText}>Calculate BMR</Text>
-              </TouchableOpacity>
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Age</Text>
+              <Text style={styles.fieldHelper}>Years · example: 29</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Age in years"
+                placeholderTextColor="#8A8F98"
+                keyboardType="numeric"
+                value={age}
+                onChangeText={setAge}
+                returnKeyType="next"
+                selectionColor="#00ADA2"
+              />
             </View>
 
-            {bmr && (
-              <View style={styles.resultCard}>
-                <Text style={styles.resultLabel}>Your BMR</Text>
-                <Text style={styles.resultValue}>{bmr}</Text>
-                <Text style={styles.resultMeta}>kilocalories per day</Text>
-              </View>
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Weight</Text>
+              <Text style={styles.fieldHelper}>Kilograms · example: 70</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Weight in kg"
+                placeholderTextColor="#8A8F98"
+                keyboardType="numeric"
+                value={weight}
+                onChangeText={setWeight}
+                returnKeyType="next"
+                selectionColor="#00ADA2"
+              />
+            </View>
+
+            <View style={styles.field}>
+              <Text style={styles.fieldLabel}>Height</Text>
+              <Text style={styles.fieldHelper}>Centimeters or meters · example: 172 or 1.72</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Height"
+                placeholderTextColor="#8A8F98"
+                keyboardType="numeric"
+                value={height}
+                onChangeText={setHeight}
+                returnKeyType="done"
+                selectionColor="#00ADA2"
+              />
+            </View>
+
+            {!!errorMessage && (
+              <Text style={styles.errorMessage}>{errorMessage}</Text>
             )}
 
-            <View style={styles.bottomSpacer} />
-          </ScrollView>
-        </View>
-      </TouchableWithoutFeedback>
+            <TouchableOpacity
+              onPress={calculateBMR}
+              style={styles.primaryButton}
+              activeOpacity={0.85}
+            >
+              <Text style={styles.primaryButtonText}>Calculate BMR</Text>
+            </TouchableOpacity>
+          </View>
+
+          {bmr && (
+            <View style={styles.resultCard}>
+              <Text style={styles.resultLabel}>Your BMR</Text>
+              <Text style={styles.resultValue}>{bmr}</Text>
+              <Text style={styles.resultMeta}>kilocalories per day</Text>
+            </View>
+          )}
+
+          <View style={styles.bottomSpacer} />
+        </ScrollView>
+      </View>
     </KeyboardAvoidingView>
   )
 }
