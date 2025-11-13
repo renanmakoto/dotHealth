@@ -188,12 +188,14 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 24,
+    alignItems: "center",
   },
   title: {
     fontSize: 32,
-    color: "#111111",
+    color: "#00ADA2",
     fontWeight: "700",
     letterSpacing: 0.3,
+    textAlign: "center",
   },
   subtitle: {
     marginTop: 8,
