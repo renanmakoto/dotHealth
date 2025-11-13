@@ -22,7 +22,7 @@ export default function Footer() {
       edges={['bottom']}
       style={[
         styles.footerContainer,
-        { paddingBottom: Math.max(insets.bottom, 1) },
+        { paddingBottom: Math.max(insets.bottom - 24, 0) },
       ]}
     >
       <Text style={styles.footer}>2025 · by dotExtension</Text>
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F6F6F6',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 16,
-    marginBottom: -10
+    paddingTop: 0,
+    marginBottom: 0,
   },
   footer: {
     color: '#858585',
