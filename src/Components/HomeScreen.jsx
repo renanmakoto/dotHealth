@@ -50,12 +50,14 @@ const styles = StyleSheet.create({
   },
   hero: {
     marginBottom: 32,
+    alignItems: 'center',
   },
   appName: {
     fontSize: 42,
     color: '#00ADA2',
     fontWeight: '700',
     letterSpacing: 1,
+    textAlign: 'center',
   },
   card: {
     backgroundColor: '#FFFFFF',
