@@ -1,175 +1,171 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useCallback } from 'react'
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
   Keyboard,
   Vibration,
   ScrollView,
-} from "react-native"
-import { Picker } from "@react-native-picker/picker"
+} from 'react-native'
+import { Picker } from '@react-native-picker/picker'
+
+import {
+  Button,
+  Card,
+  ErrorMessage,
+  InputField,
+  ScreenHeader,
+  SectionLabel,
+} from './common'
+import {
+  COLORS,
+  SPACING,
+  FONT_SIZES,
+  FONT_WEIGHTS,
+  BORDER_RADIUS,
+  SHADOWS,
+  GENDER_OPTIONS,
+  MESSAGES,
+} from '../constants'
+import { calculateBMR, validateBMRInputs } from '../utils/calculations'
 
 export default function BMRCalculator() {
-  const [age, setAge] = useState("")
-  const [weight, setWeight] = useState("")
-  const [height, setHeight] = useState("")
-  const [gender, setGender] = useState("male")
+  const [age, setAge] = useState('')
+  const [weight, setWeight] = useState('')
+  const [height, setHeight] = useState('')
+  const [gender, setGender] = useState(GENDER_OPTIONS.MALE)
+  
   const [bmr, setBmr] = useState(null)
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState('')
+  
   const scrollViewRef = useRef(null)
 
-  const calculateBMR = () => {
-    if (!age || !weight || !height) {
-      setErrorMessage("Please fill in age, weight, and height to continue.")
+  const handleCalculate = useCallback(() => {
+    const validation = validateBMRInputs({ age, weight, height })
+
+    if (!validation.isValid) {
+      setErrorMessage(validation.error)
       setBmr(null)
       Vibration.vibrate(300)
       return
     }
 
-    const parsedAge = parseFloat(age)
-    const parsedWeight = parseFloat(weight)
-    let parsedHeight = parseFloat(height)
+    const calculatedBMR = calculateBMR({
+      age: validation.parsed.age,
+      weight: validation.parsed.weight,
+      height: validation.parsed.height,
+      gender,
+    })
 
-    if ([parsedAge, parsedWeight, parsedHeight].some((value) => Number.isNaN(value) || value <= 0)) {
-      setErrorMessage("Enter valid numerical values greater than zero.")
-      setBmr(null)
-      Vibration.vibrate(300)
-      return
-    }
-
-    if (parsedHeight > 10) {
-      parsedHeight = parsedHeight / 100
-    }
-
-    let bmrValue
-    if (gender === "male") {
-      bmrValue = 88.362 + 13.397 * parsedWeight + 4.799 * (parsedHeight * 100) - 5.677 * parsedAge
-    } else {
-      bmrValue = 447.593 + 9.247 * parsedWeight + 3.098 * (parsedHeight * 100) - 4.33 * parsedAge
-    }
-
-    setErrorMessage("")
-    setBmr(bmrValue.toFixed(2))
+    setErrorMessage('')
+    setBmr(calculatedBMR)
     Keyboard.dismiss()
 
     setTimeout(() => {
       scrollViewRef.current?.scrollToEnd({ animated: true })
     }, 150)
-  }
+  }, [age, weight, height, gender])
 
   return (
     <KeyboardAvoidingView
       style={styles.flex}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <View style={styles.container}>
         <ScrollView
           ref={scrollViewRef}
-          contentContainerStyle={styles.content}
+          contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTap="handled"
+          keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag"
           onScrollBeginDrag={Keyboard.dismiss}
         >
-          <View style={styles.header}>
-            <Text style={styles.title}>BMR Calculator</Text>
-            <Text style={styles.subtitle}>
-              Estimate how many calories your body needs at rest to stay fueled.
-            </Text>
-          </View>
+          <ScreenHeader
+            title="BMR Calculator"
+            subtitle="Estimate how many calories your body needs at rest to stay fueled."
+          />
 
-          <View style={styles.card}>
-            <Text style={styles.sectionLabel}>Personal profile</Text>
+          <Card>
+            <SectionLabel>Personal profile</SectionLabel>
 
-            <View style={styles.field}>
-              <Text style={styles.fieldLabel}>Gender</Text>
-              <View style={styles.pickerWrapper}>
-                <Picker
-                  selectedValue={gender}
-                  onValueChange={(value) => setGender(value)}
-                  style={styles.picker}
-                  dropdownIconColor="#00ADA2"
-                >
-                  <Picker.Item label="Male" value="male" color="#111111" />
-                  <Picker.Item label="Female" value="female" color="#111111" />
-                </Picker>
-              </View>
-            </View>
+            <GenderPicker value={gender} onValueChange={setGender} />
 
-            <View style={styles.field}>
-              <Text style={styles.fieldLabel}>Age</Text>
-              <Text style={styles.fieldHelper}>Years · example: 29</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Age in years"
-                placeholderTextColor="#8A8F98"
-                keyboardType="numeric"
-                value={age}
-                onChangeText={setAge}
-                returnKeyType="next"
-                selectionColor="#00ADA2"
-              />
-            </View>
+            <InputField
+              label="Age"
+              helperText="Years · example: 29"
+              placeholder="Age in years"
+              value={age}
+              onChangeText={setAge}
+              keyboardType="numeric"
+              returnKeyType="next"
+            />
 
-            <View style={styles.field}>
-              <Text style={styles.fieldLabel}>Weight</Text>
-              <Text style={styles.fieldHelper}>Kilograms · example: 70</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Weight in kg"
-                placeholderTextColor="#8A8F98"
-                keyboardType="numeric"
-                value={weight}
-                onChangeText={setWeight}
-                returnKeyType="next"
-                selectionColor="#00ADA2"
-              />
-            </View>
+            <InputField
+              label="Weight"
+              helperText="Kilograms · example: 70"
+              placeholder="Weight in kg"
+              value={weight}
+              onChangeText={setWeight}
+              keyboardType="numeric"
+              returnKeyType="next"
+            />
 
-            <View style={styles.field}>
-              <Text style={styles.fieldLabel}>Height</Text>
-              <Text style={styles.fieldHelper}>Centimeters or meters · example: 172 or 1.72</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Height"
-                placeholderTextColor="#8A8F98"
-                keyboardType="numeric"
-                value={height}
-                onChangeText={setHeight}
-                returnKeyType="done"
-                selectionColor="#00ADA2"
-              />
-            </View>
+            <InputField
+              label="Height"
+              helperText="Centimeters or meters · example: 172 or 1.72"
+              placeholder="Height"
+              value={height}
+              onChangeText={setHeight}
+              keyboardType="numeric"
+              returnKeyType="done"
+            />
 
-            {!!errorMessage && (
-              <Text style={styles.errorMessage}>{errorMessage}</Text>
-            )}
+            <ErrorMessage message={errorMessage} style={styles.errorMessage} />
 
-            <TouchableOpacity
-              onPress={calculateBMR}
-              style={styles.primaryButton}
-              activeOpacity={0.85}
-            >
-              <Text style={styles.primaryButtonText}>Calculate BMR</Text>
-            </TouchableOpacity>
-          </View>
+            <Button
+              title={MESSAGES.BUTTONS.CALCULATE_BMR}
+              onPress={handleCalculate}
+              style={styles.calculateButton}
+            />
+          </Card>
 
-          {bmr && (
-            <View style={styles.resultCard}>
-              <Text style={styles.resultLabel}>Your BMR</Text>
-              <Text style={styles.resultValue}>{bmr}</Text>
-              <Text style={styles.resultMeta}>kilocalories per day</Text>
-            </View>
-          )}
+          {bmr && <BMRResult value={bmr} />}
 
           <View style={styles.bottomSpacer} />
         </ScrollView>
       </View>
     </KeyboardAvoidingView>
+  )
+}
+
+function GenderPicker({ value, onValueChange }) {
+  return (
+    <View style={styles.field}>
+      <Text style={styles.fieldLabel}>Gender</Text>
+      <View style={styles.pickerWrapper}>
+        <Picker
+          selectedValue={value}
+          onValueChange={onValueChange}
+          style={styles.picker}
+          dropdownIconColor={COLORS.primary}
+        >
+          <Picker.Item label="Male" value={GENDER_OPTIONS.MALE} color={COLORS.textPrimary} />
+          <Picker.Item label="Female" value={GENDER_OPTIONS.FEMALE} color={COLORS.textPrimary} />
+        </Picker>
+      </View>
+    </View>
+  )
+}
+
+function BMRResult({ value }) {
+  return (
+    <View style={styles.resultCard}>
+      <Text style={styles.resultLabel}>Your BMR</Text>
+      <Text style={styles.resultValue}>{value}</Text>
+      <Text style={styles.resultMeta}>kilocalories per day</Text>
+    </View>
   )
 }
 
@@ -179,130 +175,66 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#F6F6F6",
+    backgroundColor: COLORS.background,
   },
-  content: {
-    paddingHorizontal: 24,
-    paddingTop: 32,
-    paddingBottom: 24,
-  },
-  header: {
-    marginBottom: 24,
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 32,
-    color: "#00ADA2",
-    fontWeight: "700",
-    letterSpacing: 0.3,
-    textAlign: "center",
-  },
-  subtitle: {
-    marginTop: 8,
-    fontSize: 15,
-    lineHeight: 22,
-    color: "#8A8F98",
-  },
-  card: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 24,
-    padding: 24,
-    shadowColor: "#000000",
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 6,
-  },
-  sectionLabel: {
-    fontSize: 13,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    color: "#858585",
-    fontWeight: "600",
+  scrollContent: {
+    paddingHorizontal: SPACING.xxl,
+    paddingTop: SPACING.xxxl,
+    paddingBottom: SPACING.xxl,
   },
   field: {
-    marginTop: 20,
+    marginTop: SPACING.xl,
   },
   fieldLabel: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#111111",
-  },
-  fieldHelper: {
-    fontSize: 13,
-    color: "#8A8F98",
-    marginTop: 4,
+    fontSize: FONT_SIZES.xl,
+    fontWeight: FONT_WEIGHTS.semiBold,
+    color: COLORS.textPrimary,
   },
   pickerWrapper: {
-    marginTop: 12,
-    borderRadius: 18,
-    overflow: "hidden",
-    backgroundColor: "#F6F6F6",
+    marginTop: SPACING.md,
+    borderRadius: BORDER_RADIUS.lg,
+    overflow: 'hidden',
+    backgroundColor: COLORS.background,
   },
   picker: {
-    width: "100%",
+    width: '100%',
     height: 52,
-    color: "#111111",
-  },
-  input: {
-    marginTop: 12,
-    borderRadius: 16,
-    backgroundColor: "#F6F6F6",
-    paddingHorizontal: 18,
-    paddingVertical: 16,
-    fontSize: 16,
-    color: "#111111",
+    color: COLORS.textPrimary,
   },
   errorMessage: {
-    marginTop: 20,
-    fontSize: 14,
-    color: "#FFB6C1",
-    fontWeight: "600",
+    marginTop: SPACING.xl,
   },
-  primaryButton: {
-    marginTop: 28,
-    backgroundColor: "#00ADA2",
-    borderRadius: 18,
-    paddingVertical: 18,
-    alignItems: "center",
-  },
-  primaryButtonText: {
-    fontSize: 18,
-    color: "#FFFFFF",
-    fontWeight: "700",
+  calculateButton: {
+    marginTop: SPACING.xxl + 4,
   },
   resultCard: {
-    marginTop: 32,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 24,
-    paddingVertical: 28,
-    paddingHorizontal: 24,
-    alignItems: "center",
-    shadowColor: "#000000",
-    shadowOpacity: 0.06,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 10 },
-    elevation: 5,
+    marginTop: SPACING.xxxl,
+    backgroundColor: COLORS.surface,
+    borderRadius: BORDER_RADIUS.xl,
+    paddingVertical: SPACING.xxl + 4,
+    paddingHorizontal: SPACING.xxl,
+    alignItems: 'center',
+    ...SHADOWS.md,
   },
   resultLabel: {
-    fontSize: 13,
-    color: "#858585",
+    fontSize: FONT_SIZES.sm,
+    color: COLORS.textMuted,
     letterSpacing: 1,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
   resultValue: {
-    marginTop: 12,
-    fontSize: 40,
-    fontWeight: "700",
-    color: "#00ADA2",
+    marginTop: SPACING.md,
+    fontSize: FONT_SIZES.hero,
+    fontWeight: FONT_WEIGHTS.bold,
+    color: COLORS.primary,
     letterSpacing: 1,
   },
   resultMeta: {
-    marginTop: 8,
-    fontSize: 14,
-    color: "#8A8F98",
+    marginTop: SPACING.sm,
+    fontSize: FONT_SIZES.md,
+    color: COLORS.textSecondary,
   },
   bottomSpacer: {
-    height: 32,
+    height: SPACING.xxxl,
   },
 })
