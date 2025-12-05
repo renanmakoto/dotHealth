@@ -1,47 +1,55 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, Keyboard } from 'react-native'
+import { StyleSheet, Text, Keyboard } from 'react-native'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import { COLORS, FONT_WEIGHTS, APP_INFO } from '../constants'
 
 export default function Footer() {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false)
   const insets = useSafeAreaInsets()
 
   useEffect(() => {
-    const showSub = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true))
-    const hideSub = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false))
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardVisible(true)
+    })
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false)
+    })
+
     return () => {
-      showSub?.remove()
-      hideSub?.remove()
+      showSubscription?.remove()
+      hideSubscription?.remove()
     }
   }, [])
 
-  if (isKeyboardVisible) return null
+  if (isKeyboardVisible) {
+    return null
+  }
+
+  const bottomPadding = Math.max(insets.bottom - 24, 0)
 
   return (
     <SafeAreaView
       edges={['bottom']}
-      style={[
-        styles.footerContainer,
-        { paddingBottom: Math.max(insets.bottom - 24, 0) },
-      ]}
+      style={[styles.container, { paddingBottom: bottomPadding }]}
     >
-      <Text style={styles.footer}>2025 · by dotExtension</Text>
+      <Text style={styles.text}>
+        {APP_INFO.year} · by {APP_INFO.author}
+      </Text>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
-  footerContainer: {
-    backgroundColor: '#F6F6F6',
+  container: {
+    backgroundColor: COLORS.background,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 0,
     marginBottom: 0,
   },
-  footer: {
-    color: '#858585',
-    fontWeight: '600',
+  text: {
+    color: COLORS.textMuted,
+    fontWeight: FONT_WEIGHTS.semiBold,
     letterSpacing: 0.4,
-    paddingBottom: -1
   },
 })
