@@ -1,5 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import {
+  COLORS,
+  SPACING,
+  FONT_SIZES,
+  FONT_WEIGHTS,
+  BORDER_RADIUS,
+  SHADOWS,
+} from '../constants'
 
 export default function ResultBMI({ messageResultBMI, resultBMI }) {
   if (!resultBMI) {
@@ -19,40 +27,36 @@ export default function ResultBMI({ messageResultBMI, resultBMI }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    borderRadius: 24,
-    backgroundColor: "#F6F6F6",
-    paddingVertical: 28,
-    paddingHorizontal: 24,
-    alignItems: "center",
-    shadowColor: "#000000",
-    shadowOpacity: 0.05,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 3,
+    width: '100%',
+    borderRadius: BORDER_RADIUS.xl,
+    backgroundColor: COLORS.background,
+    paddingVertical: SPACING.xxl + 4,
+    paddingHorizontal: SPACING.xxl,
+    alignItems: 'center',
+    ...SHADOWS.sm,
   },
   badge: {
-    paddingHorizontal: 12,
+    paddingHorizontal: SPACING.md,
     paddingVertical: 6,
-    borderRadius: 12,
-    backgroundColor: "#00ADA2",
+    borderRadius: BORDER_RADIUS.sm,
+    backgroundColor: COLORS.primary,
   },
   badgeText: {
-    fontSize: 12,
-    color: "#FFFFFF",
-    fontWeight: "700",
+    fontSize: FONT_SIZES.xs,
+    color: COLORS.white,
+    fontWeight: FONT_WEIGHTS.bold,
     letterSpacing: 0.6,
   },
   message: {
-    marginTop: 16,
-    fontSize: 16,
-    color: "#8A8F98",
+    marginTop: SPACING.lg,
+    fontSize: FONT_SIZES.xl,
+    color: COLORS.textSecondary,
   },
   value: {
-    marginTop: 12,
-    fontSize: 40,
-    fontWeight: "700",
-    color: "#00ADA2",
+    marginTop: SPACING.md,
+    fontSize: FONT_SIZES.hero,
+    fontWeight: FONT_WEIGHTS.bold,
+    color: COLORS.primary,
     letterSpacing: 1,
   },
 })
